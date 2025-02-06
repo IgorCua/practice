@@ -85,7 +85,38 @@ export const StacksQueues = () => {
     // console.log(fish([4, 2, 1, 5, 3], [0, 0, 0, 0, 1])); //5
     // console.log(fish([6, 4, 2, 1, 5], [1, 0, 0, 0, 0])); //5
 
-    
+    function nesting(S){
+        const SLength = S.length;
+        let openingClosures = [];
+
+        if(SLength % 2 !== 0) return 0;
+
+        for(let i = 0; i < SLength; i++){
+            const current = S[i];
+
+            if(
+                openingClosures.length > (SLength / 2)
+            ) return 0;
+
+            if(current === '('){
+                openingClosures.push(current);
+                continue;
+            }
+
+            if(current === ')' && openingClosures.length > 0){
+                openingClosures.pop();
+            } else {
+                return 0;
+            }
+        }
+
+        return openingClosures.length > 0 ? 0 : 1;
+    }
+
+    // console.log(nesting("(()(())())"));//1
+    // console.log(nesting("())"));//0
+    // console.log(nesting('()(()()(((()())(()()))'));//0
+    // console.log(nesting('(('));//0
 
     return <div>Stacks and Queues</div>;
 };
