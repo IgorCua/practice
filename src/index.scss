@@ -1,8 +1,8 @@
 // @import-normalize;
-
+@use './sass/utils/base';
 // @import './sass/utils/base';
-// @import './sass/utils/mixin';
-// @import './sass/utils/variables';
+@import './sass/utils/mixin';
+@import './sass/utils/variables';
 
 * {
   box-sizing: border-box;

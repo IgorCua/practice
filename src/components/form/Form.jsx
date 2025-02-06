@@ -36,7 +36,7 @@ export const MyForm = () => {
             >
                 {({ touched, values, errors }) => {
                     // console.log(touched);
-                    console.log(errors);
+                    // console.log(errors);
                     
                     return (
                     <Form>
