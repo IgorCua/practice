@@ -62,22 +62,22 @@ export const StacksQueues = () => {
             if (direction === 1) {
                 downStream.push(current);
             } else {
-                while(downStream.length > 0) {
+                while (downStream.length > 0) {
                     let lastDownstream = downStream[downStream.length - 1];
 
-                    if(current > lastDownstream){
+                    if (current > lastDownstream) {
                         downStream.pop();
                     } else {
                         break;
                     }
                 }
                 // console.log('hello', upstream, downStream)
-                if(downStream.length === 0){
+                if (downStream.length === 0) {
                     upstream.push(current);
                 }
             }
         }
-        
+
         return upstream.length + downStream.length;
     }
 
@@ -85,25 +85,23 @@ export const StacksQueues = () => {
     // console.log(fish([4, 2, 1, 5, 3], [0, 0, 0, 0, 1])); //5
     // console.log(fish([6, 4, 2, 1, 5], [1, 0, 0, 0, 0])); //5
 
-    function nesting(S){
+    function nesting(S) {
         const SLength = S.length;
         let openingClosures = [];
 
-        if(SLength % 2 !== 0) return 0;
+        if (SLength % 2 !== 0) return 0;
 
-        for(let i = 0; i < SLength; i++){
+        for (let i = 0; i < SLength; i++) {
             const current = S[i];
 
-            if(
-                openingClosures.length > (SLength / 2)
-            ) return 0;
+            if (openingClosures.length > SLength / 2) return 0;
 
-            if(current === '('){
+            if (current === "(") {
                 openingClosures.push(current);
                 continue;
             }
 
-            if(current === ')' && openingClosures.length > 0){
+            if (current === ")" && openingClosures.length > 0) {
                 openingClosures.pop();
             } else {
                 return 0;
@@ -118,5 +116,28 @@ export const StacksQueues = () => {
     // console.log(nesting('()(()()(((()())(()()))'));//0
     // console.log(nesting('(('));//0
 
+    function stoneWall(H) {
+        let stack = [];
+        let result = 0;
+
+        for (let i = 0; i < H.length; i++) {
+            while (stack.length > 0 && stack[stack.length - 1] > H[i]) {
+                stack.pop(); // Remove taller blocks
+                console.log('while stack', stack);
+            }
+
+            if (stack.length === 0 || stack[stack.length - 1] < H[i]) {
+                stack.push(H[i]); // Add new block
+                result++; // Count new block
+                console.log('if stack', stack);
+            }
+        }
+
+        return result;
+    }
+
+    console.log(stoneWall([8, 8, 5, 7, 9, 8, 7, 4, 8])); //7
+    // console.log(stoneWall([1, 1, 1])); //1
+    // console.log(stoneWall([1])); //1
     return <div>Stacks and Queues</div>;
 };
